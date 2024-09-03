@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "206662790924",
+    "project_id": "lecturer-appointment-d8893",
+    "storage_bucket": "lecturer-appointment-d8893.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206662790924:android:c889c8734c87d348926329",
+        "android_client_info": {
+          "package_name": "com.example.lecturers_appointment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKCDJRYZj4JIZTGsib2AoClRqtwcbHhDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
