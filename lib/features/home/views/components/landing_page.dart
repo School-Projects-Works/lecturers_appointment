@@ -27,9 +27,9 @@ class _LandingPageState extends ConsumerState<LandingPage> {
     },
     {
       'image': Assets.imagesSlide3,
-      'title': 'Get a prescription',
+      'title': 'Get in touch with the lecturer',
       'description':
-          'Get a prescription from the lecturer after your appointment. You can also get a prescription for someone else. The prescription will be available for you to download and print. You can also view the prescription at any time in the app.'
+          'You can chat with the lecturer you have an appointment with. You can ask questions and get answers. You can also send files to the lecturer.'
     },
   ];
 

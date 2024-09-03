@@ -43,8 +43,7 @@ class AboutPage extends ConsumerWidget {
                               Markdown(
                                   shrinkWrap: true,
                                   selectable: true,
-                                  data:
-                                      "HealthHub is a revolutionary web and mobile application designed to transform the healthcare experience by streamlining the process of scheduling and managing medical appointments. Our platform serves as a bridge between students and healthcare providers, offering a user-friendly, efficient, and secure environment for all your healthcare needs.At HealthHub, we understand the complexities and challenges of managing healthcare appointments.",
+                                  data: "",
                                   styleSheet: MarkdownStyleSheet(
                                     p: const TextStyle(
                                         color: Colors.black,
