@@ -64,8 +64,8 @@ class Styles {
           {Color? color,
           FontWeight? fontWeight,
           double mobile = 15,
-          double tablet = 20,
-          double desktop = 25,
+          double tablet = 16,
+          double desktop = 20,
           String? fontFamily,
           FontStyle? style,
           double height = 1.5}) =>
@@ -85,8 +85,8 @@ class Styles {
           {Color? color,
           FontWeight? fontWeight,
           double mobile = 12,
-          double tablet = 15,
-          double desktop = 18,
+          double tablet = 14,
+          double desktop = 16,
           String? fontFamily,
           FontStyle? style,
           double height = 1.5}) =>

@@ -1,4 +1,5 @@
 import 'package:data_table_2/data_table_2.dart';
+import 'package:image_network/image_network.dart';
 import 'package:lecturers_appointment/core/views/custom_dialog.dart';
 import 'package:lecturers_appointment/core/views/custom_input.dart';
 import 'package:lecturers_appointment/features/auth/pages/register/data/user_model.dart';
@@ -49,14 +50,14 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
           ),
           Expanded(
             child: studentsList.filteredList.isEmpty
-                ? const Center(child: Text('No Lecturer Found'))
+                ? const Center(child: Text('No Student Found'))
                 : Padding(
                     padding: const EdgeInsets.all(16),
                     child: DataTable2(
                         columnSpacing: 12,
                         horizontalMargin: 12,
                         headingRowColor: WidgetStateProperty.all(primaryColor),
-                        minWidth: 600,
+                        minWidth: 1200,
                         columns: [
                           DataColumn2(
                             label: Text(
@@ -71,18 +72,19 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                                 style: styles.subtitle(color: Colors.white),
                               ),
                               size: ColumnSize.L),
-                          DataColumn(
+                          DataColumn2(
                             label: Text(
                               'DEPARTMENT',
                               style: styles.subtitle(color: Colors.white),
                             ),
+                            size: ColumnSize.L,
                           ),
                           DataColumn2(
                             label: Text(
                               'PROGRAMME',
                               style: styles.subtitle(color: Colors.white),
                             ),
-                            size: ColumnSize.S,
+                            size: ColumnSize.L,
                           ),
                           DataColumn2(
                             label: Text(
@@ -91,7 +93,6 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                             ),
                             size: ColumnSize.S,
                           ),
-                          
                           DataColumn2(
                               label: Text(
                                 'STATUS',
@@ -115,23 +116,21 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                           ),
                         ],
                         rows: studentsList.filteredList.isNotEmpty
-                            ? studentsList.filteredList.map((lecturer) {
+                            ? studentsList.filteredList.map((student) {
                                 var metaData = StudentMetaData.fromMap(
-                                    lecturer.userMetaData);
+                                    student.userMetaData);
                                 return DataRow(cells: [
-                                  DataCell(Container(
-                                    decoration:
-                                        BoxDecoration(border: Border.all()),
-                                    margin: const EdgeInsets.all(2),
-                                    child: lecturer.userImage.isNotEmpty
-                                        ? Image.network(
-                                            lecturer.userImage,
+                                  DataCell(Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: student.userImage.isNotEmpty
+                                        ? ImageNetwork(
+                                            image: student.userImage,
                                             width: 50,
                                             height: 50,
-                                            fit: BoxFit.fill,
+                                            borderRadius: BorderRadius.circular(10),
                                           )
                                         : Image.asset(
-                                            lecturer.userGender == 'Male'
+                                            student.userGender == 'Male'
                                                 ? Assets.imagesMale
                                                 : Assets.imagesFemale,
                                             width: 50,
@@ -139,21 +138,26 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                                             fit: BoxFit.fill,
                                           ),
                                   )),
-                                  DataCell(Text(lecturer.userName)),
-                                  DataCell(Text(lecturer.department)),
-                                  DataCell(
-                                      Text(metaData.program?? '')),
+                                  DataCell(Text(student.userName)),
+                                  DataCell(Text(
+                                    student.department,
+                                    maxLines: 2,
+                                  )),
+                                  DataCell(Text(
+                                    metaData.program ?? '',
+                                    maxLines: 2,
+                                  )),
                                   DataCell(Text(metaData.level ?? '')),
                                   DataCell(Container(
                                       width: 122,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 12),
                                       decoration: BoxDecoration(
-                                          color: lecturer.userStatus
+                                          color: student.userStatus
                                                       .toLowerCase() ==
                                                   'band'
                                               ? Colors.red.withOpacity(.8)
-                                              : lecturer.userStatus
+                                              : student.userStatus
                                                           .toLowerCase() ==
                                                       'unavailable'
                                                   ? Colors.grey.withOpacity(.8)
@@ -162,7 +166,7 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       child: Text(
-                                        lecturer.userStatus,
+                                        student.userStatus,
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(
                                             color: Colors.white),
@@ -170,7 +174,7 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                                   DataCell(Text(DateFormat('EEE,MMM dd, yyyy')
                                       .format(
                                           DateTime.fromMillisecondsSinceEpoch(
-                                              lecturer.createdAt!)))),
+                                              student.createdAt!)))),
                                   DataCell(Row(
                                     children: [
                                       //view button
@@ -180,7 +184,7 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                                                 context: context,
                                                 builder: (context) {
                                                   return ViewUser(
-                                                      user: lecturer);
+                                                      user: student);
                                                 });
                                           },
                                           icon: const Icon(
@@ -188,7 +192,7 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                                             color: Colors.blue,
                                           )),
                                       const SizedBox(width: 10),
-                                      if (lecturer.userStatus.toLowerCase() ==
+                                      if (student.userStatus.toLowerCase() ==
                                           'banned')
                                         IconButton(
                                             onPressed: () {
@@ -202,14 +206,14 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                                                             lecturerFilterProvider
                                                                 .notifier)
                                                         .updateLecturer(
-                                                            lecturer, 'active');
+                                                            student, 'active');
                                                   });
                                             },
                                             icon: const Icon(
                                               Icons.lock_open,
                                               color: Colors.green,
                                             )),
-                                      if (lecturer.userStatus.toLowerCase() !=
+                                      if (student.userStatus.toLowerCase() !=
                                           'banned')
                                         IconButton(
                                             onPressed: () {
@@ -223,7 +227,7 @@ class _StudentsPageState extends ConsumerState<StudentsPage> {
                                                             lecturerFilterProvider
                                                                 .notifier)
                                                         .updateLecturer(
-                                                            lecturer, 'banned');
+                                                            student, 'banned');
                                                   });
                                             },
                                             icon: const Icon(

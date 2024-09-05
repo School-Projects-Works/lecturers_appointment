@@ -1,3 +1,4 @@
+import 'package:image_network/image_network.dart';
 import 'package:lecturers_appointment/features/auth/pages/register/data/user_model.dart';
 import 'package:lecturers_appointment/generated/assets.dart';
 import 'package:lecturers_appointment/utils/colors.dart';
@@ -79,7 +80,6 @@ class ViewUser extends ConsumerWidget {
                         buildUserDetails(styles, user),
                         buildOtherDetails(styles, user, ref)
                       ]),
-                  
                 ],
               ),
             ),
@@ -88,24 +88,20 @@ class ViewUser extends ConsumerWidget {
       ),
     );
   }
-Widget imageBuilder(Styles styles, UserModel user) {
-    return Container(
-      width: 200,
-      height: 250,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: user.userImage.isNotEmpty
-            ? DecorationImage(
-                image: NetworkImage(user.userImage),
-                fit: BoxFit.cover,
-              )
-            : null,
-      ),
-      child: user.userImage.isNotEmpty
+
+  Widget imageBuilder(Styles styles, UserModel user) {
+    return SizedBox(
+      width: 150,
+      child: user.userImage.isEmpty
           ? Image.asset(user.userGender == 'Male'
               ? Assets.imagesMale
               : Assets.imagesFemale)
-          : null,
+          : ImageNetwork(
+              image: user.userImage,
+              width: 150,
+              height: 200,
+              borderRadius: BorderRadius.circular(10),
+            ),
     );
   }
 
@@ -134,7 +130,7 @@ Widget imageBuilder(Styles styles, UserModel user) {
               Text('Full Name: ', style: labelStyle),
               const SizedBox(width: 5),
               Expanded(
-                child: Text(user.userName, style: infoStyle),
+                child: Text(user.userName, maxLines: 1, style: infoStyle),
               ),
             ],
           ),
@@ -144,7 +140,7 @@ Widget imageBuilder(Styles styles, UserModel user) {
               Text('Email: ', style: labelStyle),
               const SizedBox(width: 5),
               Expanded(
-                child: Text(user.email, style: infoStyle),
+                child: Text(user.email, maxLines: 1, style: infoStyle),
               ),
             ],
           ),
@@ -180,8 +176,7 @@ Widget imageBuilder(Styles styles, UserModel user) {
                       ),
                     ],
                   ),
-               
-                   ])),
+                ])),
 
           const SizedBox(height: 10),
         ],
@@ -190,10 +185,9 @@ Widget imageBuilder(Styles styles, UserModel user) {
   }
 
   Widget buildOtherDetails(Styles styles, UserModel user, WidgetRef ref) {
-    StudentMetaData? studentMetaData =
-        user.userRole.toLowerCase() != 'lecturer'
-            ? StudentMetaData.fromMap(user.userMetaData)
-            : null;
+    StudentMetaData? studentMetaData = user.userRole.toLowerCase() != 'lecturer'
+        ? StudentMetaData.fromMap(user.userMetaData)
+        : null;
     var labelStyle =
         styles.body(color: Colors.grey, mobile: 14, desktop: 14, tablet: 14);
     var infoStyle = styles.body(
@@ -207,56 +201,57 @@ Widget imageBuilder(Styles styles, UserModel user) {
       margin: const EdgeInsets.symmetric(horizontal: 5),
       width: 320,
       child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (studentMetaData != null)
+            Row(
               children: [
-                Row(
-                  children: [
-                    Text(
-                      'Program: ',
-                      style: labelStyle,
-                    ),
-                    const SizedBox(width: 5),
-                    Expanded(
-                      child: Text(
-                        studentMetaData!.program ?? '',
-                        style: infoStyle,
-                      ),
-                    ),
-                  ],
+                Text(
+                  'Program: ',
+                  style: labelStyle,
                 ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Text(
-                      'Level:  ',
-                      style: labelStyle,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      studentMetaData.level ?? '',
-                      style: infoStyle,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: user.userStatus.toLowerCase() == 'active'
-                          ? Colors.green
-                          : user.userStatus.toLowerCase() == 'inactive'
-                              ? Colors.grey
-                              : Colors.red),
+                const SizedBox(width: 5),
+                Expanded(
                   child: Text(
-                    user.userStatus ,
-                    style: styles.body(color: Colors.white),
+                    studentMetaData.program ?? '',
+                    style: infoStyle,
                   ),
-                )
+                ),
               ],
             ),
+          const SizedBox(height: 10),
+          if (studentMetaData != null)
+            Row(
+              children: [
+                Text(
+                  'Level:  ',
+                  style: labelStyle,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  studentMetaData.level ?? '',
+                  style: infoStyle,
+                ),
+              ],
+            ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 50),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: user.userStatus.toLowerCase() == 'active'
+                    ? Colors.green
+                    : user.userStatus.toLowerCase() == 'inactive'
+                        ? Colors.grey
+                        : Colors.red),
+            child: Text(
+              user.userStatus,
+              style: styles.body(color: Colors.white),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

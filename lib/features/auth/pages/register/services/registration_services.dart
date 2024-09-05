@@ -111,12 +111,12 @@ class RegistrationServices {
 
   static Stream<List<UserModel>> getStudents() {
     final snapshot = _users
-        .where('userRole', isEqualTo: 'student')
+        .where('userRole', isEqualTo: 'Student')
         .where('userStatus', whereIn: [
-      'active',
-      'inactive',
-      'Inactive',
-      'Active',
+      'available',
+      'unavailable',
+      'Unavailable',
+      'Available',
       'banned',
       'Banned'
     ]).snapshots();

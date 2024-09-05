@@ -1,4 +1,5 @@
 import 'package:data_table_2/data_table_2.dart';
+import 'package:image_network/image_network.dart';
 import 'package:lecturers_appointment/core/views/custom_dialog.dart';
 import 'package:lecturers_appointment/core/views/custom_input.dart';
 import 'package:lecturers_appointment/features/dashboard/pages/view_user.dart';
@@ -9,7 +10,6 @@ import 'package:lecturers_appointment/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-
 
 class LecturersPage extends ConsumerStatefulWidget {
   const LecturersPage({super.key});
@@ -77,7 +77,6 @@ class _LecturersPageState extends ConsumerState<LecturersPage> {
                               style: styles.subtitle(color: Colors.white),
                             ),
                           ),
-                        
                           DataColumn2(
                               label: Text(
                                 'STATUS',
@@ -102,18 +101,16 @@ class _LecturersPageState extends ConsumerState<LecturersPage> {
                         ],
                         rows: lecturersList.filteredList.isNotEmpty
                             ? lecturersList.filteredList.map((lecturer) {
-                                
                                 return DataRow(cells: [
-                                  DataCell(Container(
-                                    decoration:
-                                        BoxDecoration(border: Border.all()),
-                                    margin: const EdgeInsets.all(2),
+                                  DataCell(Padding(
+                                    padding: const EdgeInsets.all(8.0),
                                     child: lecturer.userImage.isNotEmpty
-                                        ? Image.network(
-                                            lecturer.userImage,
+                                        ? ImageNetwork(
+                                            image: lecturer.userImage,
                                             width: 50,
                                             height: 50,
-                                            fit: BoxFit.fill,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           )
                                         : Image.asset(
                                             lecturer.userGender == 'Male'
@@ -124,11 +121,8 @@ class _LecturersPageState extends ConsumerState<LecturersPage> {
                                             fit: BoxFit.fill,
                                           ),
                                   )),
-                                  DataCell(Text(lecturer.userName )),
-                                  DataCell(
-                                      Text(lecturer.department)),
-                                  
-                                  
+                                  DataCell(Text(lecturer.userName)),
+                                  DataCell(Text(lecturer.department)),
                                   DataCell(Container(
                                       width: 122,
                                       padding: const EdgeInsets.symmetric(
