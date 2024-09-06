@@ -130,9 +130,9 @@ class SelectedLecturerProvider extends StateNotifier<AppointmentModel?> {
     );
     var user = ref.read(userProvider);
     //check if user do not have pending or accepted appointment with the same lecturer
-    var existenAppontment = await AppointmentServices.getAppByUserAndLecturer(
+    var existenAppointment = await AppointmentServices.getAppByUserAndLecturer(
         user.id, state!.lecturerId);
-    var pendingApp = existenAppontment
+    var pendingApp = existenAppointment
         .where((element) =>
             element.status.toLowerCase() == 'pending' ||
             element.status.toLowerCase() == 'accepted')
