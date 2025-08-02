@@ -23,10 +23,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -50,20 +47,28 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC205yhyroBdyxWlCTwYNUPVaHjfLC_G54',
-    appId: '1:206662790924:web:31e5d11e3243302a926329',
-    messagingSenderId: '206662790924',
-    projectId: 'lecturer-appointment-d8893',
-    authDomain: 'lecturer-appointment-d8893.firebaseapp.com',
-    storageBucket: 'lecturer-appointment-d8893.appspot.com',
+    apiKey: 'AIzaSyBjJ2_YdxzvBC5Guc8fn9s6dHeXInXR7_Q',
+    appId: '1:351435827313:web:f18c67dcda71214d3c53d0',
+    messagingSenderId: '351435827313',
+    projectId: 'lecturer-appointment-39895',
+    authDomain: 'lecturer-appointment-39895.firebaseapp.com',
+    storageBucket: 'lecturer-appointment-39895.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAKCDJRYZj4JIZTGsib2AoClRqtwcbHhDU',
-    appId: '1:206662790924:android:c889c8734c87d348926329',
-    messagingSenderId: '206662790924',
-    projectId: 'lecturer-appointment-d8893',
-    storageBucket: 'lecturer-appointment-d8893.appspot.com',
+    apiKey: 'AIzaSyC_JFXjP279PRDTDEkTUouSiqdhP6QaohM',
+    appId: '1:351435827313:android:452eec7ac83a0ebf3c53d0',
+    messagingSenderId: '351435827313',
+    projectId: 'lecturer-appointment-39895',
+    storageBucket: 'lecturer-appointment-39895.firebasestorage.app',
   );
 
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyAJPYJhi3WMi8P6mGANFbq52l49SYpR8gA',
+    appId: '1:351435827313:ios:266e273b1ab9ea733c53d0',
+    messagingSenderId: '351435827313',
+    projectId: 'lecturer-appointment-39895',
+    storageBucket: 'lecturer-appointment-39895.firebasestorage.app',
+    iosBundleId: 'com.example.lecturersAppointment',
+  );
 }

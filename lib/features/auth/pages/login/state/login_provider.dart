@@ -9,6 +9,7 @@ import 'package:lecturers_appointment/features/auth/pages/register/services/regi
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lecturers_appointment/features/home/state/lecturer_provider.dart';
 import 'package:universal_html/html.dart';
 
 final loginProvider = StateNotifierProvider<LoginProvider, LoginModel>((ref) {
@@ -45,6 +46,7 @@ class LoginProvider extends StateNotifier<LoginModel> {
               type: DialogType.error);
           return;
         }
+      
         if (user.emailVerified ||
             userData.userRole == 'Admin' ||
             userData.email.contains('fusekoda') ||

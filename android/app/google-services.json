@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "206662790924",
-    "project_id": "lecturer-appointment-d8893",
-    "storage_bucket": "lecturer-appointment-d8893.appspot.com"
+    "project_number": "351435827313",
+    "project_id": "lecturer-appointment-39895",
+    "storage_bucket": "lecturer-appointment-39895.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:206662790924:android:c889c8734c87d348926329",
+        "mobilesdk_app_id": "1:351435827313:android:452eec7ac83a0ebf3c53d0",
         "android_client_info": {
           "package_name": "com.example.lecturers_appointment"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAKCDJRYZj4JIZTGsib2AoClRqtwcbHhDU"
+          "current_key": "AIzaSyC_JFXjP279PRDTDEkTUouSiqdhP6QaohM"
         }
       ],
       "services": {

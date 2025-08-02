@@ -15,6 +15,7 @@ import '../services/lecturer_services.dart';
 
 final lecturersStreamProvider =
     StreamProvider.autoDispose<List<UserModel>>((ref) async* {
+      // ref.read(lecturersFilterProvider.notifier).saveDummyData();
   var data = LecturerServices.getLecturers();
   await for (var item in data) {
     ref.read(lecturersFilterProvider.notifier).setItems(item.where((element) {

@@ -88,7 +88,7 @@ class _GraphItelState extends ConsumerState<GraphItel> {
     var valueText = widget.data[value.floor()]['date'];
 
     return SideTitleWidget(
-        axisSide: meta.axisSide,
+        meta: meta,
         child: Text(
           '$valueText',
           style: style,
